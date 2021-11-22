@@ -17,9 +17,9 @@ namespace Modul4HW6
 
             var appContext = new DataAccess.AppContext(dbOptionBuilder.Options);
 
-            // Query 1
+             // Query 1
             var appContextFactory = new AppContextFactory();
-
+            /*
             using (appContext = appContextFactory.CreateDbContext(args))
             {
                 var songsArtistExist = appContext.Song
@@ -31,6 +31,7 @@ namespace Modul4HW6
                         Genre = s.Genre.Songs
                     });
             }
+            */
 
             // Query 2
             using (appContext = appContextFactory.CreateDbContext(args))
