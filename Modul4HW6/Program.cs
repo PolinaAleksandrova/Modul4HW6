@@ -16,7 +16,6 @@ namespace Modul4HW6
             var appContext = new DataAccess.AppContext(dbOptionBuilder.Options);
 
             // Query 1
-
             appContext.SaveChanges();
         }
     }
