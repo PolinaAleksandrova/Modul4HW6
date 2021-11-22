@@ -13,17 +13,14 @@ namespace Modul4HW6.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
-            builder.ToTable("Genre").HasKey(g => g.GenreId);
-            builder.Property(g => g.GenreId).IsRequired().ValueGeneratedOnAdd().HasColumnName("GenreId");
-            builder.Property(g => g.Title).IsRequired().HasMaxLength(20);
-            builder.HasData(new List<Genre>()
-            {
-                new Genre() { GenreId = 1, Title = "Genre1" },
-                new Genre() { GenreId = 2, Title = "Genre2" },
-                new Genre() { GenreId = 3, Title = "Genre3" },
-                new Genre() { GenreId = 4, Title = "Genre4" },
-                new Genre() { GenreId = 5, Title = "Genre5" }
-            });
+            builder.ToTable("Genre").HasKey(g => g.Id);
+            builder.Property(g => g.Title).IsRequired();
+            builder.HasData(
+                new Genre { Id = 1, Title = "Genre1" },
+                new Genre { Id = 2, Title = "Genre2" },
+                new Genre { Id = 3, Title = "Genre3" },
+                new Genre { Id = 4, Title = "Genre4" },
+                new Genre { Id = 5, Title = "Genre5" });
         }
     }
 }

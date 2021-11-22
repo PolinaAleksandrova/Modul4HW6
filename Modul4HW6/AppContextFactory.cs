@@ -17,7 +17,7 @@ namespace Modul4HW6
             IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             var dbOptionsBuilder = new DbContextOptionsBuilder<DataAccess.AppContext>();
             var connectionString = configuration.GetConnectionString("MusicDatabase");
-            dbOptionsBuilder.UseSqlServer(connectionString, i => i.CommandTimeout(120));
+            dbOptionsBuilder.UseSqlServer(connectionString, i => i.CommandTimeout(20));
 
             return new DataAccess.AppContext(dbOptionsBuilder.Options);
         }

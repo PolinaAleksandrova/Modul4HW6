@@ -13,25 +13,27 @@ namespace Modul4HW6.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<ArtistSong> builder)
         {
-            builder.ToTable("ArtistSong").HasKey(a => a.ArtistSongId);
-            builder.Property(a => a.ArtistSongId).ValueGeneratedOnAdd().HasColumnName("ArtistSongId");
-            builder.HasOne(a => a.Song)
-                .WithMany(a => a.ArtistSongs)
-                .HasForeignKey(a => a.SongId)
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.ToTable("ArtistSong").HasKey(a => a.Id);
+            builder.Property(a => a.ArtistId).IsRequired();
+            builder.Property(a => a.SongId).IsRequired();
 
             builder.HasOne(a => a.Artist)
-                .WithMany(a => a.ArtistSongs)
+                .WithMany(x => x.ArtistSongs)
                 .HasForeignKey(a => a.ArtistId)
                 .OnDelete(DeleteBehavior.Cascade);
-            builder.HasData(new List<ArtistSong>()
-            {
-                new ArtistSong() { ArtistSongId = 1,  SongId = 1, ArtistId = 1, },
-                new ArtistSong() { ArtistSongId = 2,  SongId = 2, ArtistId = 2, },
-                new ArtistSong() { ArtistSongId = 3,  SongId = 3, ArtistId = 3, },
-                new ArtistSong() { ArtistSongId = 4,  SongId = 4, ArtistId = 2, },
-                new ArtistSong() { ArtistSongId = 5,  SongId = 5, ArtistId = 5, }
-            });
+            builder.HasOne(s => s.Song)
+                .WithMany(x => x.ArtistSongs)
+                .HasForeignKey(s => s.SongId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            
+            builder.HasData(
+                new ArtistSong { Id = 1, ArtistId = 1,  SongId = 1 },
+                new ArtistSong { Id = 2, ArtistId = 4,  SongId = 2 },
+                new ArtistSong { Id = 3, ArtistId = 3,  SongId = 3 },
+                new ArtistSong { Id = 4, ArtistId = 7,  SongId = 4 },
+                new ArtistSong { Id = 5, ArtistId = 8,  SongId = 5 },
+                new ArtistSong { Id = 6, ArtistId = 1,  SongId = 5 });
         }
     }
 }
