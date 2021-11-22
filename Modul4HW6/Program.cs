@@ -14,7 +14,10 @@ namespace Modul4HW6
             dbOptionBuilder.UseSqlServer(connectionString, i => i.CommandTimeout(20));
 
             var appContext = new DataAccess.AppContext(dbOptionBuilder.Options);
-            appContext.Database.Migrate();
+
+            // Query 1
+
+
             appContext.SaveChanges();
         }
     }

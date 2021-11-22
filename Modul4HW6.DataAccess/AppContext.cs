@@ -32,7 +32,7 @@ namespace Modul4HW6.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.LogTo(Console.Write);
+           optionsBuilder.LogTo(Console.Write);
         }
     }
 }
