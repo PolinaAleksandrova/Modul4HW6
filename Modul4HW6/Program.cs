@@ -30,13 +30,19 @@ namespace Modul4HW6
                         SongArtist = s.ArtistSongs.Select(s => s.Artist.Name),
                         Genre = s.Genre.Songs
                     });
+            }
 
-                foreach (var item in songsArtistExist)
-                {
-                    Console.WriteLine(item.SongTitle);
-                    Console.WriteLine(item.SongArtist);
-                    Console.WriteLine(item.Genre);
-                }
+            // Query 2
+            using (appContext = appContextFactory.CreateDbContext(args))
+            {
+                var songsQuantity = appContext.Song
+                    .GroupBy(i => i.Genre.Title)
+                    .Select(s => new
+                    {
+                        GenreTitle = s.Key,
+                        CountSongs = s.Count()
+                    })
+                    .ToList();
             }
         }
     }
