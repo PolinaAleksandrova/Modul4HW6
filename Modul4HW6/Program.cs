@@ -17,7 +17,6 @@ namespace Modul4HW6
 
             // Query 1
 
-
             appContext.SaveChanges();
         }
     }
