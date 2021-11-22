@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Modul4HW6.DataAccess.Models;
 
 namespace Modul4HW6
 {
@@ -21,11 +22,21 @@ namespace Modul4HW6
 
             using (appContext = appContextFactory.CreateDbContext(args))
             {
-                var songs = appContext.Songs.Select(s => new
+                var songsArtistExist = appContext.Song
+                    .Where(s => s.ArtistSongs.TrueForAll(a => a.Artist.IsExist == true)).ToList()
+                    .Select(s => new
+                    {
+                        SongTitle = s.Title,
+                        SongArtist = s.ArtistSongs.Select(s => s.Artist.Name),
+                        Genre = s.Genre.Songs
+                    });
+
+                foreach (var item in songsArtistExist)
                 {
-                    Name = s.Title,
-                    Genre = s.Genre
-                });
+                    Console.WriteLine(item.SongTitle);
+                    Console.WriteLine(item.SongArtist);
+                    Console.WriteLine(item.Genre);
+                }
             }
         }
     }
