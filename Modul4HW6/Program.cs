@@ -44,6 +44,15 @@ namespace Modul4HW6
                     })
                     .ToList();
             }
+
+            // Query 3
+            using (appContext = appContextFactory.CreateDbContext(args))
+            {
+                var youngArtist = appContext.Artists.Max(a => a.DateOfBirth);
+                var previouslyReleased = appContext.Song
+                    .Where(s => s.ReleasedDate < youngArtist)
+                    .ToList();
+            }
         }
     }
 }
