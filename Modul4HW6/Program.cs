@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,7 +17,16 @@ namespace Modul4HW6
             var appContext = new DataAccess.AppContext(dbOptionBuilder.Options);
 
             // Query 1
-            appContext.SaveChanges();
+            var appContextFactory = new AppContextFactory();
+
+            using (appContext = appContextFactory.CreateDbContext(args))
+            {
+                var songs = appContext.Songs.Select(s => new
+                {
+                    Name = s.Title,
+                    Genre = s.Genre
+                });
+            }
         }
     }
 }
